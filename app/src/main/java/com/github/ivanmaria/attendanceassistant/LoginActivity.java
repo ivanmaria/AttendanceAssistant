@@ -77,10 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject userJson = obj.getJSONObject("user");
 
                         //creating a new user object
-                        User user = new User(
-                                userJson.getString("name"),
-                                userJson.getString("id")
-                        );
+                        SavePref pref = new SavePref(getApplicationContext());
+                        pref.saveVal("name",userJson.getString("name"));
+                        pref.saveVal("id",userJson.getString("id"));
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     } else {
