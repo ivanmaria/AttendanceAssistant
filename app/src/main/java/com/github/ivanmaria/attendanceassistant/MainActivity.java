@@ -3,6 +3,8 @@ package com.github.ivanmaria.attendanceassistant;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -79,17 +81,22 @@ TextView name,userid;
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Fragment fragment = null;
         if (id == R.id.nav_attendance) {
-            // Handle the camera action
+            fragment = new AttendanceFragment();
         } else if (id == R.id.nav_stats) {
-
+            fragment = new StatsFragment();
         } else if (id == R.id.nav_defaulter) {
-
+            fragment = new DefaulterFragment();
         } else if (id == R.id.nav_logout) {
-
+        SavePref pref = new SavePref(this);
+            pref.clearVal();
         }
-
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

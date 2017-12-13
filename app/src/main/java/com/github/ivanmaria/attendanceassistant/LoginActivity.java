@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Invalid username or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),"An Error has occurred!", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }

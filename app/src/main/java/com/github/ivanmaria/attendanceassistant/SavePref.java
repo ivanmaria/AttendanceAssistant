@@ -7,6 +7,8 @@ package com.github.ivanmaria.attendanceassistant;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
+
 public class SavePref {
     private static final String SHARED_PREF_NAME = "attendanceassistant";
     private Context context;
@@ -35,6 +37,8 @@ public class SavePref {
         editor.clear();
         editor.apply();
         context.startActivity(new Intent(context, LoginActivity.class));
+        Toast.makeText(context,"Logged Out!", Toast.LENGTH_SHORT).show();
+
     }
 
 }
