@@ -3,7 +3,9 @@ package com.github.ivanmaria.attendanceassistant;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +18,9 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
  * A simple {@link Fragment} subclass.
  */
 public class AttendanceFragment extends Fragment {
-    MaterialBetterSpinner SpinnerSubject ;
-    MaterialBetterSpinner SpinnerClass ;
-    String[] SPINNER_SUB = {"OS","MP","CN","SOOAD"};
-    String[] SPINNER_CLASS = {"cr1","cr2","cr3","cr4"};
 
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     public AttendanceFragment() {
         // Required empty public constructor
@@ -33,17 +33,11 @@ public class AttendanceFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_attendance, container, false);
 
-        SpinnerSubject = (MaterialBetterSpinner)v.findViewById(R.id.selSub);
+        tabLayout = (TabLayout)v.findViewById(R.id.tabs);
+        viewPager = (ViewPager)v.findViewById(R.id.view_pager);
+        viewPager.setAdapter(new CustomFragmentPageAdapter(getChildFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, SPINNER_SUB);
-
-        SpinnerSubject.setAdapter(adapter1);
-
-        SpinnerClass = (MaterialBetterSpinner)v.findViewById(R.id.selClass);
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, SPINNER_CLASS);
-
-        SpinnerClass.setAdapter(adapter2);
 return v;
     //    return inflater.inflate(R.layout.fragment_attendance, container, false);
     }

@@ -1,0 +1,146 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.github.ivanmaria.attendanceassistant.PracticalFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Step 1: Select Subject"
+                android:textSize="30dp" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/selSub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:hint="Select Subject"
+                app:met_floatingLabel="highlight" />
+
+            <View
+                style="@style/Divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Step 2: Select Class"
+                android:textSize="30dp" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/selClass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:hint="Select Class"
+                app:met_floatingLabel="highlight" />
+
+            <View
+                style="@style/Divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Step 3: Select Range"
+                android:textSize="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.5">
+
+                    <EditText
+
+                        android:id="@+id/minroll"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+
+                        android:hint="Min Roll No."
+
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.5">
+
+                    <EditText
+
+                        android:id="@+id/maxroll"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+
+                        android:hint="Max Roll No."
+
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+            <View
+                style="@style/Divider" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/takebtn"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:onClick="TakeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="10dp"
+                android:text="Take Attendance" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
