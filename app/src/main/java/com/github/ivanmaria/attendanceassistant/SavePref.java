@@ -36,9 +36,6 @@ public class SavePref {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        context.startActivity(new Intent(context, LoginActivity.class));
-        Toast.makeText(context,"Logged Out!", Toast.LENGTH_SHORT).show();
-
     }
 
 }

@@ -21,6 +21,7 @@ public class StatsFragment extends Fragment {
     Context context;
     SwipeRefreshLayout mSwipeRefreshLayout;
     public int subCount=4, pracCount=5;
+    float height;
     public static String [] subList={"CN","OS","MP","SOOAD"};
     public static String [] hours={"18/25","16/18","13/20","17/18"};
     public static int [] percent={75,80,65,95};
@@ -42,9 +43,11 @@ public class StatsFragment extends Fragment {
         context=getContext();
         MainActivity main = (MainActivity) getActivity();
         lv=(ListView) v.findViewById(R.id.listView);
-        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, subCount*60));
+        height = subCount * 50 * getContext().getResources().getDisplayMetrics().density;
+        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)height));
         lvp=(ListView) v.findViewById(R.id.ListViewP);
-        lvp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pracCount*60));
+        height = pracCount * 50 * getContext().getResources().getDisplayMetrics().density;
+        lvp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)height));
         lv.setAdapter(new CustomAdapter(main, subList,hours,percent));
         lvp.setAdapter(new CustomAdapter(main, subListP,hoursP,percentP));
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeToRefresh);

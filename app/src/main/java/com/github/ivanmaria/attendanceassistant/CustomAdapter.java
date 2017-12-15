@@ -68,7 +68,9 @@ public class CustomAdapter extends BaseAdapter{
         holder.subPercent.setText(percent[position]+"%");
         holder.pb.setProgress(percent[position]);
         if(percent[position]<75)
-        holder.pb.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+            holder.pb.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        else
+            holder.pb.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
 
         rowView.setOnClickListener(new OnClickListener() {
             @Override
