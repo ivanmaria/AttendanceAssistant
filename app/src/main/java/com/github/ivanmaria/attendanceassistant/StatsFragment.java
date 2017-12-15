@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 
@@ -17,6 +19,8 @@ import android.widget.ListView;
 public class StatsFragment extends Fragment {
     ListView lv, lvp;
     Context context;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    public int subCount=4, pracCount=5;
     public static String [] subList={"CN","OS","MP","SOOAD"};
     public static String [] hours={"18/25","16/18","13/20","17/18"};
     public static int [] percent={75,80,65,95};
@@ -38,9 +42,24 @@ public class StatsFragment extends Fragment {
         context=getContext();
         MainActivity main = (MainActivity) getActivity();
         lv=(ListView) v.findViewById(R.id.listView);
+        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, subCount*60));
         lvp=(ListView) v.findViewById(R.id.ListViewP);
+        lvp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pracCount*60));
         lv.setAdapter(new CustomAdapter(main, subList,hours,percent));
         lvp.setAdapter(new CustomAdapter(main, subListP,hoursP,percentP));
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeToRefresh);
+
+
+
+
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
 
     return v;
     }
