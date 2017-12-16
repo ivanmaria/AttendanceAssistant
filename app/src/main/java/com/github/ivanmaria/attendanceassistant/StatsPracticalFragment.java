@@ -8,7 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
@@ -17,19 +17,36 @@ import android.widget.ListView;
  */
 public class StatsPracticalFragment extends Fragment {
     public static String[] pracList = new String[25];
-    public static String[] hours = new String[25];
     public static int[] percent = new int[25];
     public int pracCount = 0;
     ListView lv;
     Context context;
     SwipeRefreshLayout mSwipeRefreshLayout;
-    float height;
 
 
     public StatsPracticalFragment() {
         // Required empty public constructor
     }
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight() + 15;
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,9 +62,8 @@ public class StatsPracticalFragment extends Fragment {
             pracList[i - 1] = pref.getVal("prac" + i);
         MainActivity main = (MainActivity) getActivity();
         lv = v.findViewById(R.id.listViewPrac);
-        height = pracCount * 60 * getContext().getResources().getDisplayMetrics().density;
-        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)height));
-        lv.setAdapter(new CustomAdapter(main, pracCount, pracList, hours, percent));
+        lv.setAdapter(new CustomAdapter(main, pracCount, pracList, percent));
+        setListViewHeightBasedOnChildren(lv);
         mSwipeRefreshLayout = v.findViewById(R.id.swipeToRefreshPrac);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -59,5 +75,4 @@ public class StatsPracticalFragment extends Fragment {
 
         return v;
     }
-
 }

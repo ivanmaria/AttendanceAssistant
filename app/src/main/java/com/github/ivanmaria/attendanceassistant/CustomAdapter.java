@@ -19,10 +19,9 @@ public class CustomAdapter extends BaseAdapter{
     int [] percent;
     int count;
 
-    public CustomAdapter(MainActivity mainActivity, int getcount, String[] subList1, String[] hours1, int[] percent1) {
+    public CustomAdapter(MainActivity mainActivity, int getcount, String[] subList1, int[] percent1) {
         // TODO Auto-generated constructor stub
         subList=subList1;
-        hours=hours1;
         context=mainActivity;
         percent=percent1;
         count = getcount;
@@ -54,12 +53,10 @@ public class CustomAdapter extends BaseAdapter{
         View rowView;
         rowView = inflater.inflate(R.layout.subject_stats, null);
         holder.subName = rowView.findViewById(R.id.sub);
-        holder.subHours = rowView.findViewById(R.id.total);
         holder.subPercent = rowView.findViewById(R.id.percent);
         holder.pb = rowView.findViewById(R.id.progressBar);
 
         holder.subName.setText(subList[position]);
-        holder.subHours.setText(hours[position]);
         holder.subPercent.setText(percent[position]+"%");
         holder.pb.setProgress(percent[position]);
         if(percent[position]<75)
@@ -83,7 +80,6 @@ public class CustomAdapter extends BaseAdapter{
 
     public class Holder {
         TextView subName;
-        TextView subHours;
         TextView subPercent;
         ProgressBar pb;
     }

@@ -53,7 +53,7 @@ public class GetSubject extends AsyncTask<Void, Void, String> {
                     pref.saveVal("sub" + i, userJsonSub.getString("sub" + i));
                 for (int i = 1; i <= pnum; i++)
                     pref.saveVal("prac" + i, userJsonPrac.getString("prac" + i));
-
+                GetSubjectAttendance getAtt = new GetSubjectAttendance(context, username);
                 Toast.makeText(context, "Data fetched Successfully", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, obj.getString("message"), Toast.LENGTH_SHORT).show();
