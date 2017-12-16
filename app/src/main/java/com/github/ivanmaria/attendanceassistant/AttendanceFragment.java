@@ -9,9 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 
 /**
@@ -35,7 +32,7 @@ public class AttendanceFragment extends Fragment {
 
         tabLayout = (TabLayout)v.findViewById(R.id.tabs);
         viewPager = (ViewPager)v.findViewById(R.id.view_pager);
-        viewPager.setAdapter(new CustomFragmentPageAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new AttendanceFragmentPageAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
 
 return v;
