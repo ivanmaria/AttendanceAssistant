@@ -74,6 +74,9 @@ public class StatsLectureFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                SavePref pref = new SavePref(getContext());
+                GetSubject get = new GetSubject();
+                get.getSubject(getContext(), pref.getVal("id"));
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });

@@ -70,6 +70,9 @@ public class StatsPracticalFragment extends Fragment {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(false);
+                SavePref pref = new SavePref(getContext());
+                GetSubject get = new GetSubject();
+                get.getSubject(getContext(), pref.getVal("id"));
             }
         });
 
