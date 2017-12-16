@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.github.ivanmaria.attendanceassistant.StatsFragment">
 
@@ -12,164 +12,15 @@
         android:id="@+id/tabs_stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
+        android:background="@color/colorPrimary"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorHeight="3dp"
-        android:background="@color/colorPrimary"/>
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white" />
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager_stats"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    <!--
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeToRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="Subject-wise Attendance"
-                android:textSize="25dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="Subject"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:gravity="center"
-                    android:text="Hours"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Stats"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:gravity="center"
-                    android:text="Percent"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="180dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center_horizontal"
-                android:text="Practical-wise Attendance"
-                android:textSize="25dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="Subject"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:gravity="center"
-                    android:text="Hours"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Stats"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:gravity="center"
-                    android:text="Percent"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15dp" />
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/ListViewP"
-                android:layout_width="match_parent"
-                android:layout_height="180dp" />
-
-            </LinearLayout>
-    </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
--->
 </LinearLayout>
