@@ -1,10 +1,10 @@
 package com.github.ivanmaria.attendanceassistant;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.view.View;
@@ -80,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                         SavePref pref = new SavePref(getApplicationContext());
                         pref.saveVal("name",userJson.getString("name"));
                         pref.saveVal("id",userJson.getString("id"));
+                        pref.saveInt("subnum", 0);
+                        pref.saveInt("pracnum", 0);
+                        GetSubject get = new GetSubject();
+                        get.getSubject(getApplicationContext(), user);
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     } else {
@@ -108,4 +112,14 @@ public class LoginActivity extends AppCompatActivity {
         UserLogin ul = new UserLogin();
         ul.execute();
     }
+
+
 }
+
+
+
+
+
+
+
+

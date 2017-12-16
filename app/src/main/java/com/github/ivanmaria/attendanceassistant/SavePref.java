@@ -5,9 +5,7 @@ package com.github.ivanmaria.attendanceassistant;
  */
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 public class SavePref {
     private static final String SHARED_PREF_NAME = "attendanceassistant";
@@ -38,4 +36,17 @@ public class SavePref {
         editor.apply();
     }
 
+    public void saveInt(String key, int value) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public int getInt(String key) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPref.getInt(key, 0);
+    }
 }

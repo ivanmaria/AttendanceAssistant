@@ -8,29 +8,31 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 public class CustomAdapter extends BaseAdapter{
+    private static LayoutInflater inflater = null;
     String [] subList;
     String [] hours;
     Context context;
     int [] percent;
-    private static LayoutInflater inflater=null;
-    public CustomAdapter(MainActivity mainActivity, String[] subList1, String[] hours1, int[] percent1) {
+    int count;
+
+    public CustomAdapter(MainActivity mainActivity, int getcount, String[] subList1, String[] hours1, int[] percent1) {
         // TODO Auto-generated constructor stub
         subList=subList1;
         hours=hours1;
         context=mainActivity;
         percent=percent1;
+        count = getcount;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return subList.length;
+        return count;
     }
 
     @Override
@@ -45,23 +47,16 @@ public class CustomAdapter extends BaseAdapter{
         return position;
     }
 
-    public class Holder
-    {
-        TextView subName;
-        TextView subHours;
-        TextView subPercent;
-        ProgressBar pb;
-    }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.subject_stats, null);
-        holder.subName=(TextView) rowView.findViewById(R.id.sub);
-        holder.subHours=(TextView) rowView.findViewById(R.id.total);
-        holder.subPercent=(TextView) rowView.findViewById(R.id.percent);
-        holder.pb = (ProgressBar) rowView.findViewById(R.id.progressBar);
+        holder.subName = rowView.findViewById(R.id.sub);
+        holder.subHours = rowView.findViewById(R.id.total);
+        holder.subPercent = rowView.findViewById(R.id.percent);
+        holder.pb = rowView.findViewById(R.id.progressBar);
 
         holder.subName.setText(subList[position]);
         holder.subHours.setText(hours[position]);
@@ -84,6 +79,13 @@ public class CustomAdapter extends BaseAdapter{
             }
         });
         return rowView;
+    }
+
+    public class Holder {
+        TextView subName;
+        TextView subHours;
+        TextView subPercent;
+        ProgressBar pb;
     }
 
 }

@@ -16,14 +16,15 @@ import android.widget.ListView;
  * A simple {@link Fragment} subclass.
  */
 public class StatsPracticalFragment extends Fragment {
+    public static String[] pracList = new String[25];
+    public static String[] hours = new String[25];
+    public static int[] percent = new int[25];
+    public int pracCount = 0;
     ListView lv;
     Context context;
     SwipeRefreshLayout mSwipeRefreshLayout;
-    public int pracCount=5;
     float height;
-    public static String [] pracList={"CN","OS","MP","SOOAD","WT"};
-    public static String [] hours={"18/25","16/18","13/20","17/18","10/20"};
-    public static int [] percent={75,80,65,95,50};
+
 
     public StatsPracticalFragment() {
         // Required empty public constructor
@@ -34,14 +35,20 @@ public class StatsPracticalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View v = inflater.inflate(R.layout.fragment_stats_practical, container, false);
         context=getContext();
+        SavePref pref = new SavePref(context);
+        pracCount = pref.getInt("pracnum");
+        for (int i = 1; i <= pracCount; i++)
+            pracList[i - 1] = pref.getVal("prac" + i);
         MainActivity main = (MainActivity) getActivity();
-        lv=(ListView) v.findViewById(R.id.listViewPrac);
+        lv = v.findViewById(R.id.listViewPrac);
         height = pracCount * 60 * getContext().getResources().getDisplayMetrics().density;
         lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)height));
-        lv.setAdapter(new CustomAdapter(main, pracList,hours,percent));
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeToRefreshPrac);
+        lv.setAdapter(new CustomAdapter(main, pracCount, pracList, hours, percent));
+        mSwipeRefreshLayout = v.findViewById(R.id.swipeToRefreshPrac);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
