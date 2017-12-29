@@ -82,8 +82,14 @@ public class LoginActivity extends AppCompatActivity {
                         pref.saveVal("id",userJson.getString("id"));
                         pref.saveInt("subnum", 0);
                         pref.saveInt("pracnum", 0);
+                        pref.saveInt("classnum", 0);
                         GetSubject get = new GetSubject();
                         get.getSubject(getApplicationContext(), user);
+
+                        GetClass get1 = new GetClass();
+                        get1.getClass(getApplicationContext());
+
+
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     } else {

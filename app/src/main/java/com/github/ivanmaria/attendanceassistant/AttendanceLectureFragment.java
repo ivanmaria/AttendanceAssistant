@@ -1,12 +1,18 @@
 package com.github.ivanmaria.attendanceassistant;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -17,6 +23,10 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 public class AttendanceLectureFragment extends Fragment {
     SearchableSpinner SpinnerSubject;
     SearchableSpinner SpinnerClass;
+    AppCompatButton btn;
+    RadioGroup radio;
+    RadioButton rb1, rb2, rb3;
+    String temp = "null";
     int subCount = 0, classCount = 0;
     public AttendanceLectureFragment() {
         // Required empty public constructor
@@ -28,6 +38,12 @@ public class AttendanceLectureFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_attendance_lecture, container, false);
+        final View x = v;
+        btn = v.findViewById(R.id.takelec);
+        radio = v.findViewById(R.id.radio);
+        RadioButton rb1 = v.findViewById(R.id.radioButton);
+        RadioButton rb2 = v.findViewById(R.id.radioButton2);
+        final RadioButton rb3 = v.findViewById(R.id.radioButton3);
 
         SavePref pref = new SavePref(getContext());
         subCount = pref.getInt("subnum");
@@ -59,6 +75,42 @@ public class AttendanceLectureFragment extends Fragment {
 
         SpinnerClass.setAdapter(adapter2);
 
+
+        radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = x.findViewById(checkedId);
+                temp = rb.getText().toString();
+            }
+        });
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SpinnerClass.getSelectedItem() == null) {
+                    TextView errorText = (TextView) SpinnerClass.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);
+                }
+                if (SpinnerSubject.getSelectedItem() == null) {
+                    TextView errorText = (TextView) SpinnerSubject.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);
+                }
+                if (radio.getCheckedRadioButtonId() == -1) {
+                    rb3.setError("");
+                } else
+                    rb3.setError(null);
+
+                if (SpinnerClass.getSelectedItem() != null && SpinnerSubject.getSelectedItem() != null && radio.getCheckedRadioButtonId() != -1) {
+                    String subject = SpinnerSubject.getSelectedItem().toString();
+                    String classroom = SpinnerClass.getSelectedItem().toString();
+
+                    Toast.makeText(getContext(), "Sub: " + subject + "\nClass: " + classroom + "\nLec: " + temp, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return v;
     }

@@ -1,6 +1,7 @@
 package com.github.ivanmaria.attendanceassistant;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -36,7 +39,7 @@ public class AttendancePracticalFragment extends Fragment {
         for (int i = 1; i <= pracCount; i++)
             SPINNER_PRAC[i - 1] = pref.getVal("prac" + i);
 
-        button = v.findViewById(R.id.takebtn);
+        button = v.findViewById(R.id.takeprac);
 
         SpinnerSubject = v.findViewById(R.id.selSub);
 
@@ -46,6 +49,20 @@ public class AttendancePracticalFragment extends Fragment {
 
         SpinnerSubject.setAdapter(adapter1);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SpinnerSubject.getSelectedItem() == null) {
+                    TextView errorText = (TextView) SpinnerSubject.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);//just to highlight that this is an error
+                }
+                if (SpinnerSubject.getSelectedItem() != null) {
+                    String subject = SpinnerSubject.getSelectedItem().toString();
+                    Toast.makeText(getContext(), "Sub: " + subject, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return v;
     }
 

@@ -71,7 +71,6 @@ class GetAttendance extends AsyncTask<Void, Void, String> {
             SavePref pref = new SavePref(context);
             pref.saveInt(subkey + "_total", obj.getInt("total"));
             pref.saveInt(subkey + "_present", obj.getInt("present"));
-
         } catch (JSONException e) {
             Toast.makeText(context, "An Error has occurred!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
