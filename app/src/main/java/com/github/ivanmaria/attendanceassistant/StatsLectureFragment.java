@@ -4,7 +4,6 @@ package com.github.ivanmaria.attendanceassistant;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ public class StatsLectureFragment extends Fragment {
     public int subCount = 0;
     ListView lv;
     Context context;
-    SwipeRefreshLayout mSwipeRefreshLayout;
 
     public StatsLectureFragment() {
         // Required empty public constructor
@@ -62,24 +60,14 @@ public class StatsLectureFragment extends Fragment {
                 float y = (float) pref.getInt("sub" + i + "_total");
                 percent[i - 1] = (int) (x / y * 100);
             } catch (Exception e) {
-                percent[i - 1] = 10;
+                percent[i - 1] = 0;
             }
         }
 
         MainActivity main = (MainActivity) getActivity();
         lv = v.findViewById(R.id.listView);
         lv.setAdapter(new CustomAdapter(main, subCount, subList, percent));
-        mSwipeRefreshLayout = v.findViewById(R.id.swipeToRefresh);
         setListViewHeightBasedOnChildren(lv);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                SavePref pref = new SavePref(getContext());
-                GetSubject get = new GetSubject();
-                get.getSubject(getContext(), pref.getVal("id"));
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
         return v;
     }

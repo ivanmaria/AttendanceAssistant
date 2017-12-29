@@ -8,18 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AttendanceLectureFragment extends Fragment {
-    MaterialBetterSpinner SpinnerSubject ;
-    MaterialBetterSpinner SpinnerClass ;
-    String[] SPINNER_SUB = {"OS","MP","CN","SOOAD"};
-    String[] SPINNER_CLASS = {"cr1","cr2","cr3","cr4"};
-
+    SearchableSpinner SpinnerSubject;
+    SearchableSpinner SpinnerClass;
+    int subCount = 0, classCount = 0;
     public AttendanceLectureFragment() {
         // Required empty public constructor
     }
@@ -31,17 +29,36 @@ public class AttendanceLectureFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_attendance_lecture, container, false);
 
-        SpinnerSubject = (MaterialBetterSpinner)v.findViewById(R.id.selSub);
+        SavePref pref = new SavePref(getContext());
+        subCount = pref.getInt("subnum");
+        classCount = pref.getInt("classnum");
+
+        String[] SPINNER_SUB = new String[subCount];
+        String[] SPINNER_CLASS = new String[classCount];
+
+        for (int i = 1; i <= subCount; i++)
+            SPINNER_SUB[i - 1] = pref.getVal("sub" + i);
+
+        for (int i = 1; i <= classCount; i++)
+            SPINNER_CLASS[i - 1] = pref.getVal("class" + i);
+
+
+        SpinnerSubject = v.findViewById(R.id.selSub);
+
+        SpinnerSubject.setTitle("Select Subject");
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, SPINNER_SUB);
 
         SpinnerSubject.setAdapter(adapter1);
 
-        SpinnerClass = (MaterialBetterSpinner)v.findViewById(R.id.selClass);
+        SpinnerClass = v.findViewById(R.id.selClass);
+
+        SpinnerClass.setTitle("Select Class");
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, SPINNER_CLASS);
 
         SpinnerClass.setAdapter(adapter2);
+
 
         return v;
     }
